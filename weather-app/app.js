@@ -16,4 +16,19 @@ yargs.command({
     }
 });
 
+yargs.command({
+    command: 'GEO', 
+    describe: 'Name of the location',
+    builder: {
+        name: {
+            type: 'string',
+            demandOption: true,
+            describe: 'Location name'
+        }        
+    },
+    handler(argv) {
+        weather.searchByNameGeocode(argv.name)
+    }
+});
+
 yargs.parse();
