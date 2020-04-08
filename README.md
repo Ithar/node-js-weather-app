@@ -18,9 +18,9 @@ Stack  | version |
 *Build env* | local
 
 ## NPM Modules (Local)
-> npm install fs
-> npm install validator
+> npm install got
 > npm install chalk
+
 
 ## NPM Modules (Global)
 > npm install -g nodemon
