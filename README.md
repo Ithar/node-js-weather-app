@@ -18,16 +18,16 @@ Stack  | version |
 *Build env* | local
 
 ## NPM Modules (Local)
-> npm install got
 > npm install chalk
-
+> npm install got
+> npm install express
 
 ## NPM Modules (Global)
 > npm install -g nodemon
 
 ## Application Run
-> node weather.js
-> nodemon weather.js
+> web-server/src/ node app.js
+> weather-app/src/ node app.js
 
 ## Application URL
 node app.js (LOC|GEO) [--name] 
