@@ -9,7 +9,7 @@ const geocode =  {
     getURL() {
         return 'https://api.mapbox.com/geocoding/v5/mapbox.places/{location}.json?';
     },
-    search(location) {
+    search(location, callback) {
        
         (async () => {
     
@@ -18,16 +18,17 @@ const geocode =  {
                 let url = this.getURL().replace('{location}', location);
                 url = url + 'limit=1&access_token='+this.getAccessToken();
 
-                console.log('>>>>>> ' + url);
-
                 const response = await got(url, {responseType: 'json'})
 
-                if (response.body.features[0] !== undefined) {
-                    const placeName = response.body.features[0].place_name;
-                    const lng = response.body.features[0].center[0];
-                    const lat = response.body.features[0].center[1];
+                if (response.body.features.length > 0) {
+                    const data = {
+                        location : response.body.features[0].place_name,
+                        lng :  response.body.features[0].center[0],
+                        lat : response.body.features[0].center[1]    
+                    }
                 
-                    console.log(chalk.green(placeName + '\nlat:' + lat + '\nlng' + lng));
+                    console.log(chalk.green(data.location + '\t[' + data.lat + ',' + data.lng+']'));
+                    callback(data)
                 } else {
                     console.log(chalk.red('Unable to get coordinates for location:' + location));
                 }

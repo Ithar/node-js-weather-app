@@ -15,29 +15,40 @@ const weather =  {
         (async () => {
            
             try {
-
-                const url = this.getURL()+'&q='+location;
-
+                const url = this.getURL()+'&q=' + encodeURIComponent(location);
                 const response = await got(url, {responseType: 'json'})
-
-                const data = response.body;
-                const temperature = data.main.temp;
-                const forcast = data.weather[0].main;
-                
-                console.log(chalk.green('The forcast for ' + chalk.blue(location) + ' is ' + chalk.blue(forcast) + ' with a temperature of ' + chalk.blue(temperature) + ' celsius.'))
+                this.displayWeatherResponse(response, location)
             } catch (error) {
                 console.log(chalk.red('Unable to read weather information at present'))
-                console.log(chalk.red('ERROR:' +error.message))
+                console.log(chalk.red('ERROR: ' +error.message))
             }
         })();
 
     },
     searchByNameGeocode(location) {
-        geoCode.search(location);
+        geoCode.search(location, this.searchByLatLng)
     },
-    convertKelvinToCelsius(kelvin) {
-        return Math.round((kelvin - 273.15) * 10) / 10 ;
-    } 
+    searchByLatLng(data) {
+        (async () => {
+            try {
+                const url = weather.getURL()+'&lat=' + data.lat + '&lon=' + data.lng;
+                const response = await got(url, {responseType: 'json'})
+                weather.displayWeatherResponse(response, data.location)
+            } catch {
+                console.log(chalk.red('Unable to read weather information at present'))
+                console.log(chalk.red('ERROR: ' +error.message))
+            }
+        })();
+    },
+    displayWeatherResponse(response, location) {
+
+        const data = response.body;
+        const temperature = data.main.temp;
+        const forcast = data.weather[0].main;
+        const country = data.sys.country;
+        
+        console.log(chalk.green('The forcast for ' + chalk.blue(location + ' ' + country) + ' is ' + chalk.blue(forcast) + ' with a temperature of ' + chalk.blue(temperature) + ' celsius.'))
+    }
 }
 
 module.exports = weather;

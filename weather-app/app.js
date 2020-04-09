@@ -2,7 +2,7 @@ const yargs = require('yargs');
 const weather = require('./weather.js');
 
 yargs.command({
-    command: 'LOCATION', 
+    command: 'LOC', 
     describe: 'Name of the location',
     builder: {
         name: {

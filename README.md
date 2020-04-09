@@ -30,7 +30,7 @@ Stack  | version |
 > nodemon weather.js
 
 ## Application URL
-
+node app.js (LOC|GEO) [--name] 
 ## Application GIT branches
 - master
 
