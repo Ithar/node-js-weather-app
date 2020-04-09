@@ -28,12 +28,12 @@ const weather =  {
     searchByNameGeocode(location) {
         geoCode.search(location, this.searchByLatLng)
     },
-    searchByLatLng(data) {
+    searchByLatLng({lat, lng, location}) {
         (async () => {
             try {
-                const url = weather.getURL()+'&lat=' + data.lat + '&lon=' + data.lng;
+                const url = weather.getURL()+'&lat=' + lat + '&lon=' + lng;
                 const response = await got(url, {responseType: 'json'})
-                weather.displayWeatherResponse(response, data.location)
+                weather.displayWeatherResponse(response, location)
             } catch {
                 console.log(chalk.red('Unable to read weather information at present'))
                 console.log(chalk.red('ERROR: ' +error.message))
