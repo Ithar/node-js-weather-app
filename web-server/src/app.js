@@ -1,34 +1,48 @@
 const path = require('path')
 const express = require('express')
-
-const publicDir = path.join(__dirname, '../public')
-const viewsDir = path.join(__dirname, '../views')
+const hbs = require('hbs')
 
 const app = express()
+
+// Path configs 
+const publicDir = path.join(__dirname, '../public')
+const viewsDir = path.join(__dirname, '../public/templates/views')
+const viewsPartialsDir = path.join(__dirname, '../public/templates/partials')
 
 // ##########
 // Settings
 // ##########
+
+// -- root path
+app.use(express.static(publicDir))
+
+// -- views 
 app.set('views', viewsDir)
 app.set('view engine', 'hbs')
-
-// Static Path
-app.use(express.static(publicDir))
+hbs.registerPartials(viewsPartialsDir)
 
 // ##########
 // Routes
 // ##########
 
 // -- index
-app.get('/', (req, res) => {
+app.get('', (req, res) => {
     res.render('index', {
-        header : 'Weather'
+        pageTitle : 'Weather'
     })
 })
 
 // -- about
 app.get('/about', (req, res) => {
-    res.sendFile('about.html')
+    res.render('about', {
+        pageTitle: 'About'
+    })
+})
+
+
+// -- help
+app.get('/help', (req, res) => {
+    res.sendFile('help.html')
 })
 
 // ###########
