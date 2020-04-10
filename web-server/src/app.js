@@ -28,14 +28,14 @@ hbs.registerPartials(viewsPartialsDir)
 // -- index
 app.get('', (req, res) => {
     res.render('index', {
-        pageTitle : 'Weather'
+        pageHeader : 'Welcome to the Weather Site'
     })
 })
 
 // -- about
 app.get('/about.html', (req, res) => {
     res.render('about', {
-        pageTitle: 'About'
+        pageHeader: 'About the Weather site'
     })
 })
 
