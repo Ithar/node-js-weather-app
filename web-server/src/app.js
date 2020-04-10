@@ -33,7 +33,7 @@ app.get('', (req, res) => {
 })
 
 // -- about
-app.get('/about', (req, res) => {
+app.get('/about.html', (req, res) => {
     res.render('about', {
         pageTitle: 'About'
     })
