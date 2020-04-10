@@ -13,9 +13,6 @@ const viewsPartialsDir = path.join(__dirname, '../public/templates/partials')
 // Settings
 // ##########
 
-// -- root path
-app.use(express.static(publicDir))
-
 // -- views 
 app.set('views', viewsDir)
 app.set('view engine', 'hbs')
@@ -25,10 +22,12 @@ hbs.registerPartials(viewsPartialsDir)
 // Routes
 // ##########
 
+app.use(express.static(publicDir))
+
 // -- index
 app.get('', (req, res) => {
     res.render('index', {
-        pageHeader : 'Welcome to the Weather Site'
+        pageHeader : 'Welcome to the Weather'
     })
 })
 
@@ -39,9 +38,9 @@ app.get('/about', (req, res) => {
     })
 })
 
-// -- stack 
-app.get('/stack.html', (req, res) => {
-    res.sendFile('stack.html')
+// -- 404
+app.get('*', (req, res) => {
+    res.render('404')
 })
 
 // ###########
