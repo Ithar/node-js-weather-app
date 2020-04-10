@@ -6,18 +6,29 @@ const viewsDir = path.join(__dirname, '../views')
 
 const app = express()
 
+// ##########
 // Settings
+// ##########
 app.set('views', viewsDir)
 app.set('view engine', 'hbs')
 
 // Static Path
 app.use(express.static(publicDir))
 
+// ##########
 // Routes
+// ##########
+
+// -- index
 app.get('/', (req, res) => {
     res.render('index', {
         header : 'Weather'
     })
+})
+
+// -- about
+app.get('/about', (req, res) => {
+    res.sendFile('about.html')
 })
 
 // ###########

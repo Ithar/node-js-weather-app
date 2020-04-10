@@ -30,8 +30,13 @@ Stack  | version |
 > web-server/src/ node app.js
 > weather-app/src/ node app.js
 
+## TODO [IM 20-04-10] - Remove
+node app.js (LOC|GEO) [--name] ## []
+
 ## Application URL
-node app.js (LOC|GEO) [--name] 
+http://localhost:3000
+http://localhost:3000/about.html
+
 ## Application GIT branches
 - master
 
