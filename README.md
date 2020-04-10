@@ -21,6 +21,7 @@ Stack  | version |
 > npm install chalk
 > npm install got
 > npm install express
+> npm install hbs
 
 ## NPM Modules (Global)
 > npm install -g nodemon
