@@ -33,15 +33,14 @@ app.get('', (req, res) => {
 })
 
 // -- about
-app.get('/about.html', (req, res) => {
+app.get('/about', (req, res) => {
     res.render('about', {
         pageHeader: 'About the Weather site'
     })
 })
 
-
-// -- dev stack 
-app.get('/stack', (req, res) => {
+// -- stack 
+app.get('/stack.html', (req, res) => {
     res.sendFile('stack.html')
 })
 
