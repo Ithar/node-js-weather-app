@@ -40,9 +40,9 @@ app.get('/about.html', (req, res) => {
 })
 
 
-// -- help
-app.get('/help', (req, res) => {
-    res.sendFile('help.html')
+// -- dev stack 
+app.get('/stack', (req, res) => {
+    res.sendFile('stack.html')
 })
 
 // ###########
