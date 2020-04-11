@@ -17,9 +17,7 @@ const weather =  {
 
         (async () => {
             try {
-                console.log('0')
                 const url = weather.getURL()+'&lat=' + lat + '&lon=' + lng;
-                console.log('1')
                 const response = await got(url, {responseType: 'json'})
                 callback(undefined, weather.successResponse(response, location)) 
             } catch(error) {
