@@ -2,8 +2,8 @@
 Asynchronous weather app.
 
 #### Features 
-- 
-
+- weather-app - command line 
+- web-server - 
 ## 
 
 ## Application Stack

@@ -18,6 +18,24 @@ app.set('views', viewsDir)
 app.set('view engine', 'hbs')
 hbs.registerPartials(viewsPartialsDir)
 
+// ###########
+// REST APIS
+// ###########
+app.get('/weather', (req, res) => {
+
+    const searchedAddress = req.query.address
+
+    if (searchedAddress === undefined) {
+        return res.send({
+            error : 'Please enter address'
+        })
+    }
+
+    res.send({
+        address : searchedAddress,
+    })
+})
+
 // ##########
 // Routes
 // ##########
@@ -43,15 +61,7 @@ app.get('*', (req, res) => {
     res.render('404')
 })
 
-// ###########
-// REST APIS
-// ###########
-app.get('/weather', (req, res) => {
-    res.send({
-        key1 : 'value1',
-        key2 : 'value2',
-    })
-})
+
 
 app.listen(3000, () => {
     console.log('Express server is up and running !');
