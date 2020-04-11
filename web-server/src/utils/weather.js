@@ -23,7 +23,7 @@ const weather =  {
             } catch(error) {
                 console.log(chalk.red('Unable to read weather information at present'))
                 console.log(chalk.red('ERROR: ' +error.message))
-                callback(weather.errorResponse(error.message, 'W-14457'), undefined)
+                callback(weather.errorResponse(error.message), undefined)
             }
         })();
     },
@@ -41,11 +41,10 @@ const weather =  {
         }
         
     }, 
-    errorResponse(msg, code) {
+    errorResponse(msg) {
         return {
             success: false,
-            msg,
-            code 
+            msg
         }
     }
 }

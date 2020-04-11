@@ -9,8 +9,13 @@
     {{>header}}
 
      <main role="main">
-
       <section class="jumbotron text-center">
+
+        <div id="errorContainer" class="alert alert-danger" role="alert" style="display: none;">
+            <p>Unable to view weather data at present</p>
+            <p>ROOT CAUSE: <span id="data-error-msg"></span></p>
+        </div>
+
         <div class="container">
           <h3 class="jumbotron-heading">{{pageHeader}}</h1>
           <p class="lead text-muted">
@@ -24,64 +29,69 @@
         </div>
       </section>
 
-      <div class="album py-5 bg-light">
-        <div class="container">
+      <section id="weatherContent" style="display: none;">
+        <div class="album py-5 bg-light">
+          <div class="container">
 
-          <div class="row">
-            <div class="col-md-4">
-              <div class="card mb-4 shadow-sm">
-                <img src="./img/weather.jpg">
-                <div class="card-body">
-                  <p class="card-text">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                  </p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+            <div class="row">
+
+              <!-- Weather -->
+              <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                  
+                  <div class="card-body">
+                    <img id="data-weather-icon" src="">
+                    <p class="card-text">
+                      <span id="data-weather-desc"></span><br/>
+                    </p>
+                    <p>Have a wonderful day regardless of the weather</p> 
+                    <div class="d-flex justify-content-between align-items-center">
+                      <small class="text-muted">1 mins</small>
                     </div>
-                    <small class="text-muted">9 mins</small>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="col-md-4">
-              <div class="card mb-4 shadow-sm">
-                <img src="./img/weather.jpg">
-                <div class="card-body">
-                  <p class="card-text">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                  </p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+
+              <!-- Temperature -->
+              <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                  
+                  <div class="card-body">
+                    <img src="./img/tempreture.png">
+                    <p class="card-text">
+                      <br/>
+                      <b>Temperature: </b><span id="data-temperature" class="temperature"></span><br/>
+                      <b>Min Temperature: </b><span id="data-temperature-min" class="min-temp"></span><br/>
+                      <b>Max Temperature: </b><span id="data-temperature-max" class="max-temp"></span>
+                      <br/> <br/>
+                    </p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <small class="text-muted">1 mins</small>
                     </div>
-                    <small class="text-muted">9 mins</small>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="col-md-4">
-              <div class="card mb-4 shadow-sm">
-                <img src="./img/weather.jpg">
-                <div class="card-body">
-                  <p class="card-text">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                  </p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                    </div>
-                    <small class="text-muted">9 mins</small>
+
+              <!-- Location -->
+              <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                  <div class="card-body">
+                    <img src="./img/location.png">
+                    <p class="card-text">
+                        <br/>
+                        <b>Location: </b><span id="data-location"></span><br/>
+                        <b>Country: </b><span id="data-country"></span><br/>
+                        <b>Latitude: </b><span id="data-lat"></span><br/>
+                        <b>Longitude: </b><span id="data-lng"></span>
+                        <br/> <br/> <br/>
+                    </p>
                   </div>
                 </div>
               </div>
-            </div>
-            </div>
+            </div>  
+          </div>
         </div>
-      </div>
+      </section>
      </main>
 
     {{>footer}}

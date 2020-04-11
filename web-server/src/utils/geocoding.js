@@ -32,21 +32,20 @@ const geocode =  {
                 } else {
                     const error = 'Unable to get coordinates for location:' + location;
                     console.log(chalk.red(error));
-                    callback(geocode.errorResponse(error, 'G-687841'), undefined)
+                    callback(geocode.errorResponse(error), undefined)
                 }
                 
             } catch (error) {
                 console.log(chalk.red('Unable to geocoding information at present'))
                 console.log(chalk.red('ERROR: ' + error.message))
-                callback(geocode.errorResponse(error.message, 'G-25875647'), undefined)
+                callback(geocode.errorResponse(error.message), undefined)
             }
         })();
     },
-    errorResponse(error, code) {
+    errorResponse(msg) {
         return {
             success: false,
-            error,
-            code
+            msg
         }
     }
 }
