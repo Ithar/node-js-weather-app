@@ -28,17 +28,26 @@ const geocode =  {
                     }
                 
                     console.log(chalk.green(data.location + '\t[' + data.lat + ',' + data.lng+']'));
-                    callback(data)
+                    callback(undefined,  data)
                 } else {
-                    console.log(chalk.red('Unable to get coordinates for location:' + location));
+                    const error = 'Unable to get coordinates for location:' + location;
+                    console.log(chalk.red(error));
+                    callback(geocode.errorResponse(error, 'G-687841'), undefined)
                 }
-
                 
             } catch (error) {
                 console.log(chalk.red('Unable to geocoding information at present'))
                 console.log(chalk.red('ERROR: ' + error.message))
+                callback(geocode.errorResponse(error.message, 'G-25875647'), undefined)
             }
         })();
+    },
+    errorResponse(error, code) {
+        return {
+            success: false,
+            error,
+            code
+        }
     }
 }
 

@@ -35,11 +35,23 @@ app.get('/weather', (req, res) => {
         })
     }
 
-    const data = geo.search(address, weather.searchByLatLng)
+    geo.search(address, (error, geoData) => {
 
-    res.send({
-        'address' : address,
+        if (error) {
+            return res.send(error)
+        }
+
+        weather.searchByLatLng(geoData, (error, weatherData) => {
+
+            if (error) {
+                return res.send(error)
+            }
+
+            res.send(weatherData)
+        })
+
     })
+    
 })
 
 // ##########

@@ -5,49 +5,50 @@ const geoCode = require('./geocoding.js');
 const weather =  {
     
     getAppId() {
-        return 'b6907d289e10d714a6e88b30761fae22'; // 801b8b3ed1b1e7d40d3a0f2aa909bf41
+        return '439d4b804bc8187953eb36d2a8c26a02'; // 801b8b3ed1b1e7d40d3a0f2aa909bf41
     },
     getURL() {
         return 'https://openweathermap.org/data/2.5/weather?appid='+ this.getAppId(); 
     },
-    searchByName(location) {
-       
-        (async () => {
-           
-            try {
-                const url = this.getURL()+'&q=' + encodeURIComponent(location);
-                const response = await got(url, {responseType: 'json'})
-                this.displayWeatherResponse(response, location)
-            } catch (error) {
-                console.log(chalk.red('Unable to read weather information at present'))
-                console.log(chalk.red('ERROR: ' +error.message))
-            }
-        })();
-
-    },
     searchByNameGeocode(location) {
         geoCode.search(location, this.searchByLatLng)
     },
-    searchByLatLng({lat, lng, location}) {
+    searchByLatLng({lat, lng, location}, callback) {
+
         (async () => {
             try {
+                console.log('0')
                 const url = weather.getURL()+'&lat=' + lat + '&lon=' + lng;
+                console.log('1')
                 const response = await got(url, {responseType: 'json'})
-                weather.displayWeatherResponse(response, location)
-            } catch {
+                callback(undefined, weather.successResponse(response, location)) 
+            } catch(error) {
                 console.log(chalk.red('Unable to read weather information at present'))
                 console.log(chalk.red('ERROR: ' +error.message))
+                callback(weather.errorResponse(error.message, 'W-14457'), undefined)
             }
         })();
     },
-    displayWeatherResponse(response, location) {
+    successResponse(response, location) {
 
-        const data = response.body;
-        const temperature = data.main.temp;
-        const forcast = data.weather[0].main;
-        const country = data.sys.country;
+        const body = response.body;
+        const temperature = body.main.temp;
+        const forcast = body.weather[0].main;
         
-        console.log(chalk.green('The forcast for ' + chalk.blue(location + ' ' + country) + ' is ' + chalk.blue(forcast) + ' with a temperature of ' + chalk.blue(temperature) + ' celsius.'))
+        return {
+            success : true,
+            temperature,
+            forcast,
+            location    
+        }
+        
+    }, 
+    errorResponse(msg, code) {
+        return {
+            success: false,
+            msg,
+            code 
+        }
     }
 }
 
