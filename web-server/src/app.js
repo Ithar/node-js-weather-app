@@ -1,6 +1,10 @@
+// Core modules
 const path = require('path')
 const express = require('express')
 const hbs = require('hbs')
+// Project files
+const geo = require('./utils/geocoding')
+const weather = require('./utils/weather')
 
 const app = express()
 
@@ -23,16 +27,18 @@ hbs.registerPartials(viewsPartialsDir)
 // ###########
 app.get('/weather', (req, res) => {
 
-    const searchedAddress = req.query.address
+    const address = req.query.address
 
-    if (searchedAddress === undefined) {
+    if (address === undefined) {
         return res.send({
             error : 'Please enter address'
         })
     }
 
+    const data = geo.search(address, weather.searchByLatLng)
+
     res.send({
-        address : searchedAddress,
+        'address' : address,
     })
 })
 

@@ -5,7 +5,7 @@ const geoCode = require('./geocoding.js');
 const weather =  {
     
     getAppId() {
-        return 'b6907d289e10d714a6e88b30761fae22'; // 801b8b3ed1b1e7d40d3a0f2aa909bf41
+        return '439d4b804bc8187953eb36d2a8c26a02';// 801b8b3ed1b1e7d40d3a0f2aa909bf41
     },
     getURL() {
         return 'https://openweathermap.org/data/2.5/weather?appid='+ this.getAppId(); 
@@ -34,8 +34,8 @@ const weather =  {
                 const url = weather.getURL()+'&lat=' + lat + '&lon=' + lng;
                 const response = await got(url, {responseType: 'json'})
                 weather.displayWeatherResponse(response, location)
-            } catch {
-                console.log(chalk.red('Unable to read weather information at present'))
+            } catch (error) {
+                console.log(chalk.red('Unable to read weather information at present via lat/lng'))
                 console.log(chalk.red('ERROR: ' +error.message))
             }
         })();
