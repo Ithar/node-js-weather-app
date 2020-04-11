@@ -1,23 +1,27 @@
-console.log('client side JS')
-
 $( document ).ready(function() {
     
     // Ajax
     function perforSearch(address) {
-        
-        const url = 'http://localhost:3000/weather?address=' + address
 
-        fetch(url).then((response) => {
-            response.json().then((data) => {
-                console.log(data)
-                
-                if (data.success) {
-                    displayWeatherData(data)
-                } else {
-                    displayError(data)
-                }
+        if (address === '') {
+            displayError({
+                msg: 'Please enter valid address'
             })
-        })
+        } else {
+            const url = 'http://localhost:3000/weather?address=' + address
+
+            fetch(url).then((response) => {
+                response.json().then((data) => {
+                    console.log(data)
+                    
+                    if (data.success) {
+                        displayWeatherData(data)
+                    } else {
+                        displayError(data)
+                    }
+                })
+            })
+        }
     }
 
     function displayError(data) {
@@ -28,16 +32,15 @@ $( document ).ready(function() {
 
     function displayWeatherData(data) {
         
-        const condition = data.condition;
+        const forcast = data.forcast;
         const speed = data.windSpeed;
-        const desc = 'The weather forcast now is <b>' + condition + '</b> with wind speeds of <b>' + speed + '</b>.' 
+        const desc = 'The weather forcast now is <b>' + forcast + '</b> with wind speeds of <b>' + speed + '</b>.' 
         const icon = getIcon(802)
 
-        const temp = '19' + '&deg;c'
-        const tempMin = '8' + '&deg;c';
-        const tempMax = '22' + '&deg;c';
-        const humidity = '100'
-
+        const temp = data.temperature + '&deg;c'
+        const tempMin = data.temperatureMin + '&deg;c';
+        const tempMax = data.temperatureMax + '&deg;c';
+        
         const location = data.location.substr(0, data.location.lastIndexOf(","))
         const country = data.location.substr(data.location.lastIndexOf(",") + 1, data.location.length)
         const lat = data.lat
@@ -51,7 +54,6 @@ $( document ).ready(function() {
         $('#data-temperature').html(temp);
         $('#data-temperature-min').html(tempMin);
         $('#data-temperature-max').html(tempMax);
-        $('#data-humidity').html(humidity);
 
         // Location
         $('#data-location').html(location);
@@ -100,5 +102,4 @@ $( document ).ready(function() {
         perforSearch(address)
     })
   
-
 });

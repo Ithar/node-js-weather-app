@@ -19,7 +19,7 @@ const weather =  {
             try {
                 const url = weather.getURL()+'&lat=' + lat + '&lon=' + lng;
                 const response = await got(url, {responseType: 'json'})
-                callback(undefined, weather.successResponse(response, location)) 
+                callback(undefined, weather.successResponse(response, lat, lng, location)) 
             } catch(error) {
                 console.log(chalk.red('Unable to read weather information at present'))
                 console.log(chalk.red('ERROR: ' +error.message))
@@ -27,17 +27,26 @@ const weather =  {
             }
         })();
     },
-    successResponse(response, location) {
+    successResponse(response,  lat, lng, location) {
 
-        const body = response.body;
-        const temperature = body.main.temp;
-        const forcast = body.weather[0].main;
-        
+        const body = response.body
+        const temperature = Math.round(body.main.temp)
+        const temperatureMin = Math.round(body.main.temp_min)
+        const temperatureMax = Math.round(body.main.temp_max)
+        const forcast = body.weather[0].description
+        const windSpeed = body.wind.speed
+
         return {
             success : true,
-            temperature,
             forcast,
-            location    
+            windSpeed,
+            temperature,
+            temperatureMin,
+            temperatureMax,
+            location,
+            lat,
+            lng
+
         }
         
     }, 
