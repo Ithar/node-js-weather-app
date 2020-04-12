@@ -1,0 +1,28 @@
+{
+    "name": "weather-app-web",
+    "version": "1.0.0",
+    "description": "",
+    "main": "app.js",
+    "scripts": {
+      "start": "node src/app.js"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/Ithar/node-js-weather-app"
+    },
+    "keywords": [],
+    "author": "Ihar Malik",
+    "license": "ISC",
+    "bugs": {
+      "url": "https://github.com/Ithar/node-js-weather-app/issues"
+    },
+    "homepage": "git+https://github.com/Ithar/node-js-weather-app#readme",
+    "dependencies": {
+      "chalk": "^4.0.0",
+      "got": "^10.7.0",
+      "hbs": "^4.1.1",
+      "express": "^4.17.1"
+
+    }
+  }
+  
