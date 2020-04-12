@@ -7,6 +7,7 @@ const geo = require('./utils/geocoding')
 const weather = require('./utils/weather')
 
 const app = express()
+const port = process.env.PORT|| 3000
 
 // Path configs 
 const publicDir = path.join(__dirname, '../public')
@@ -79,8 +80,7 @@ app.get('*', (req, res) => {
     res.render('404')
 })
 
-
-
-app.listen(3000, () => {
-    console.log('Express server is up and running !');
+// Server Listener 
+app.listen(port, () => {
+    console.log('Express server is up and running on port: ' +  port +' !');
 })
