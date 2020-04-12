@@ -1,4 +1,5 @@
 // Core modules
+const chalk = require('chalk')
 const path = require('path')
 const express = require('express')
 const hbs = require('hbs')
@@ -82,5 +83,8 @@ app.get('*', (req, res) => {
 
 // Server Listener 
 app.listen(port, () => {
-    console.log('Express server is up and running on port: ' +  port +' !');
+
+    console.log('\n---------------------------------------------------')
+    console.log('|' + chalk.blue(' Express server is up and running on port: ' +  chalk.green(port) +' ! ') + '|');
+    console.log('---------------------------------------------------\n')
 })
