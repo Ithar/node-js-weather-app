@@ -47,15 +47,25 @@ Stack  | version |
 node app.js (LOC|GEO) [--name] ## []
 
 ## Application URL
-http://localhost:3000
+
+[[ Local ]]
+
+http://localhost:3000 
+
 http://localhost:3000/about.html
 
 
+[[ Heroku ]]
+
 https://node-js-weather-app-v01.herokuapp.com
+
 https://git.heroku.com/node-js-weather-app-v01.git
 
 
-## Application GIT branches
-- master
+## Application GIT
+
+heroku create node-js-weather-app-v01
+
+git subtree push --prefix web-server heroku master
 
 ## Further enhancements 
